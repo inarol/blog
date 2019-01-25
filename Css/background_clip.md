@@ -10,7 +10,7 @@
 
 关于background-clip这个css3的属性，其实早在2011年，国内最早接触和研究CSS3的大漠前辈已经介绍得很详细了（[传送门](http://www.w3cplus.com/content/css3-background-clip/)）这里就不多做介绍了，不过当时只讲解了`border-box`,`padding-box`,`content-box`。今天我要讲的是background-clip的另外一个属性`text`，这个属性非常有意思，不过能把它运用到什么样的程度，完全取决个人的创意和能力。比如下面这个效果（请用高级浏览器打开）。
 
-点击进入 <a href="/demo/background-clip/index.html" target="_blank">屌炸天效果</a>
+点击进入 <a href="https://techjs.cn/demo/background-clip/index.html" target="_blank">屌炸天效果</a>
 效果是不是很赞呢？那到底是怎么实现的呢？
 
 ## 怎样实现

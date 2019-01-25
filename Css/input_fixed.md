@@ -145,4 +145,4 @@ footer button {
 我们可以看到有一个属性设置`-webkit-overflow-scrolling: touch;`。
 这个属性很重要，如果不加这个属性的话，滚动起来会感觉不够流畅。这是-webkit-专有的特性，用来快速滚动和回弹效果。
 
-点击这里查看[demo](/demo/fixed-input/fixed-input.html)
+点击这里查看[demo](https://techjs.cn/demo/fixed-input/fixed-input.html)
