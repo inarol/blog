@@ -2,6 +2,10 @@
 
 持续更新中...
 
+## 小游戏系列
+
+- [用Threejs写的微信小游戏详解系列文章](https://github.com/inarol/rungame-blog)
+
 ## JavaScript系列
 
 - [call与apply的区别](./JavaScript/call_apply.md)
