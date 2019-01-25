@@ -13,14 +13,14 @@ webpack 2.x开始就支持了`Tree-Shaking`特性，该特性利用了ES6的模�
 ```js
 // a.js
 export const a = () => {
-    console.log('This is a module.');
+  console.log('This is a module.');
 }
 ```
 
 ```js
 // b.js
 export const b = () => {
-    console.log('This is b module.');
+  console.log('This is b module.');
 }
 console.log(b);
 ```
@@ -53,7 +53,7 @@ a();
 
 ```
 "sideEffects": [
-    "!b.js"
+  "!b.js"
 ]
 ```
 
@@ -65,12 +65,12 @@ a();
 
 ```js
 module: {
-    rules: [
-        {
-            include: path.resolve('./', 'b.js'),
-            sideEffects: false,
-        },
-    ],
+  rules: [
+    {
+      include: path.resolve('./', 'b.js'),
+      sideEffects: false,
+    },
+  ],
 },
 ```
 上面这种方式则是告诉webpack，我不需要这个模块了，即使它有副作用代码，另外这种方式的设置优先级比`package.json`高。

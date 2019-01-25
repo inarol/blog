@@ -84,13 +84,13 @@ function DefaultString(x) {
     if (IS_SYMBOL(x)) throw MakeTypeError(kSymbolToString);
     var toString = x.toString;
     if (IS_SPEC_FUNCTION(toString)) {
-      var s = %_CallFunction(x, toString);
+      var s = % _CallFunction(x, toString);
       if (IsPrimitive(s)) return s;
     }
 
     var valueOf = x.valueOf;
     if (IS_SPEC_FUNCTION(valueOf)) {
-      var v = %_CallFunction(x, valueOf);
+      var v = % _CallFunction(x, valueOf);
       if (IsPrimitive(v)) return v;
     }
   }
@@ -111,14 +111,14 @@ function DefaultString(x) {
 function DefaultNumber(x) {
   var valueOf = x.valueOf;
   if (IS_SPEC_FUNCTION(valueOf)) {
-    var v = %_CallFunction(x, valueOf);
+    var v = % _CallFunction(x, valueOf);
     if (IS_SYMBOL(v)) throw MakeTypeError(kSymbolToNumber);
     if (IS_SIMD_VALUE(x)) throw MakeTypeError(kSimdToNumber);
     if (IsPrimitive(v)) return v;
   }
   var toString = x.toString;
   if (IS_SPEC_FUNCTION(toString)) {
-    var s = %_CallFunction(x, toString);
+    var s = % _CallFunction(x, toString);
     if (IsPrimitive(s)) return s;
   }
   throw MakeTypeError(kCannotConvertToPrimitive);
@@ -151,16 +151,15 @@ function ToPrimitive(x, hint) {
 
 ```javascript
 var d = new Date();
-d.valueOf = function(){
-	return 1;
+d.valueOf = function () {
+  return 1;
 };
 d + 1; // => "1Tue Sep 20 2016 22:10:23 GMT+0800 (中国标准时间)"
 var a = [];
-a.valueOf = function(){
-	return 1;
+a.valueOf = function () {
+  return 1;
 };
-a+1; // => 2;
-
+a + 1; // => 2;
 ```
 
 ### 显式转换和隐式转换
@@ -202,17 +201,17 @@ a+1; // => 2;
 // ECMA-262, section 11.6.1, page 50.
 function ADD(x) {
   // Fast case: Check for number operands and do the addition.
-  if (IS_NUMBER(this) && IS_NUMBER(x)) return %NumberAdd(this, x);
-  if (IS_STRING(this) && IS_STRING(x)) return %_StringAdd(this, x);
+  if (IS_NUMBER(this) && IS_NUMBER(x)) return % NumberAdd(this, x);
+  if (IS_STRING(this) && IS_STRING(x)) return % _StringAdd(this, x);
   // Default implementation.
-  var a = %$toPrimitive(this, NO_HINT);
-  var b = %$toPrimitive(x, NO_HINT);
+  var a = % $toPrimitive(this, NO_HINT);
+  var b = % $toPrimitive(x, NO_HINT);
   if (IS_STRING(a)) {
-    return %_StringAdd(a, %$toString(b));
+    return % _StringAdd(a, % $toString(b));
   } else if (IS_STRING(b)) {
-    return %_StringAdd(%$nonStringToString(a), b);
+    return % _StringAdd(% $nonStringToString(a), b);
   } else {
-    return %NumberAdd(%$toNumber(a), %$toNumber(b));
+    return % NumberAdd(% $toNumber(a), % $toNumber(b));
   }
 }
 ```
@@ -280,56 +279,56 @@ function COMPARE(x, ncr) {
 ```javascript
 // ECMA-262 Section 11.9.3.
 function EQUALS(y) {
-  if (IS_STRING(this) && IS_STRING(y)) return %StringEquals(this, y);
+  if (IS_STRING(this) && IS_STRING(y)) return % StringEquals(this, y);
   var x = this;
   while (true) {
     if (IS_NUMBER(x)) {
       while (true) {
-        if (IS_NUMBER(y)) return %NumberEquals(x, y);
+        if (IS_NUMBER(y)) return % NumberEquals(x, y);
         if (IS_NULL_OR_UNDEFINED(y)) return 1;  // not equal
         if (!IS_SPEC_OBJECT(y)) {
           if (IS_SYMBOL(y) || IS_SIMD_VALUE(y)) return 1;  // not equal
           // String or boolean.
-          return %NumberEquals(x, %$toNumber(y));
+          return % NumberEquals(x, % $toNumber(y));
         }
-        y = %$toPrimitive(y, NO_HINT);
+        y = % $toPrimitive(y, NO_HINT);
       }
     } else if (IS_STRING(x)) {
       while (true) {
-        if (IS_STRING(y)) return %StringEquals(x, y);
-        if (IS_NUMBER(y)) return %NumberEquals(%$toNumber(x), y);
-        if (IS_BOOLEAN(y)) return %NumberEquals(%$toNumber(x), %$toNumber(y));
+        if (IS_STRING(y)) return % StringEquals(x, y);
+        if (IS_NUMBER(y)) return % NumberEquals(% $toNumber(x), y);
+        if (IS_BOOLEAN(y)) return % NumberEquals(% $toNumber(x), % $toNumber(y));
         if (IS_NULL_OR_UNDEFINED(y)) return 1;  // not equal
         if (IS_SYMBOL(y) || IS_SIMD_VALUE(y)) return 1;  // not equal
-        y = %$toPrimitive(y, NO_HINT);
+        y = % $toPrimitive(y, NO_HINT);
       }
     } else if (IS_SYMBOL(x)) {
-      if (IS_SYMBOL(y)) return %_ObjectEquals(x, y) ? 0 : 1;
+      if (IS_SYMBOL(y)) return % _ObjectEquals(x, y) ? 0 : 1;
       return 1; // not equal
     } else if (IS_BOOLEAN(x)) {
-      if (IS_BOOLEAN(y)) return %_ObjectEquals(x, y) ? 0 : 1;
+      if (IS_BOOLEAN(y)) return % _ObjectEquals(x, y) ? 0 : 1;
       if (IS_NULL_OR_UNDEFINED(y)) return 1;
-      if (IS_NUMBER(y)) return %NumberEquals(%$toNumber(x), y);
-      if (IS_STRING(y)) return %NumberEquals(%$toNumber(x), %$toNumber(y));
+      if (IS_NUMBER(y)) return % NumberEquals(% $toNumber(x), y);
+      if (IS_STRING(y)) return % NumberEquals(% $toNumber(x), % $toNumber(y));
       if (IS_SYMBOL(y) || IS_SIMD_VALUE(y)) return 1;  // not equal
       // y is object.
-      x = %$toNumber(x);
-      y = %$toPrimitive(y, NO_HINT);
+      x = % $toNumber(x);
+      y = % $toPrimitive(y, NO_HINT);
     } else if (IS_NULL_OR_UNDEFINED(x)) {
       return IS_NULL_OR_UNDEFINED(y) ? 0 : 1;
     } else if (IS_SIMD_VALUE(x)) {
       if (!IS_SIMD_VALUE(y)) return 1;  // not equal
-       return %SimdEquals(x, y);
+      return % SimdEquals(x, y);
     } else {
       // x is an object.
-      if (IS_SPEC_OBJECT(y)) return %_ObjectEquals(x, y) ? 0 : 1;
+      if (IS_SPEC_OBJECT(y)) return % _ObjectEquals(x, y) ? 0 : 1;
       if (IS_NULL_OR_UNDEFINED(y)) return 1;  // not equal
       if (IS_BOOLEAN(y)) {
-        y = %$toNumber(y);
+        y = % $toNumber(y);
       } else if (IS_SYMBOL(y) || IS_SIMD_VALUE(y)) {
         return 1;  // not equal
       }
-      x = %$toPrimitive(x, NO_HINT);
+      x = % $toPrimitive(x, NO_HINT);
     }
   }
 }

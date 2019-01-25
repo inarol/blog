@@ -25,78 +25,78 @@
 
 ```javascript
 // 在页面中找到第一个最小边大于290的图片，如果1秒内找不到，则返回空（不带图分享）。
-var getSharePreviewImage = function(cb) {
-    var isCalled = false;
-    var callCB = function(_img) {
-        if (isCalled) {
-            return;
-        };
-        isCalled = true;
-
-        cb(_img);
-    }
-    var _allImgs = _WXJS('img');
-    if (_allImgs.length == 0) {
-        return callCB();
-    }
-    // 过滤掉重复的图片
-    var _srcs = {};
-    var allImgs = [];
-    for (var i = 0; i < _allImgs.length; i++) {
-        var _img = _allImgs[i];
-
-        // 过滤掉不可以见的图片
-        if (_WXJS(_img).css('display') == 'none' || _WXJS(_img).css('visibility') == 'hidden') {
-            // _log('ivisable image !! ' + _img.src);
-            continue;
-        }
-        if (_srcs[_img.src]) {
-            // added
-        } else {
-            _srcs[_img.src] = 1; // mark added
-            allImgs.push(_img);
-        }
+var getSharePreviewImage = function (cb) {
+  var isCalled = false;
+  var callCB = function (_img) {
+    if (isCalled) {
+      return;
     };
-    var results = [];
-    var img;
-    for (var i = 0; i < allImgs.length && i < 100; i++) {
-        img = allImgs[i];
-        var newImg = new Image();
-        newImg.onload = function() {
-            this.isLoaded = true;
-            var loadedCount = 0;
-            for (var j = 0; j < results.length; j++) {
-                var res = results[j];
-                if (!res.isLoaded) {
-                    break;
-                }
-                loadedCount++;
-                if (res.width > 290 && res.height > 290) {
-                    callCB(res);
-                    break;
-                }
-            }
-            if (loadedCount == results.length) {
-                // 全部都已经加载完了，但还是没有找到。
-                callCB();
-            };
-        }
-        newImg.src = img.src;
-        results.push(newImg);
+    isCalled = true;
+
+    cb(_img);
+  }
+  var _allImgs = _WXJS('img');
+  if (_allImgs.length == 0) {
+    return callCB();
+  }
+  // 过滤掉重复的图片
+  var _srcs = {};
+  var allImgs = [];
+  for (var i = 0; i < _allImgs.length; i++) {
+    var _img = _allImgs[i];
+
+    // 过滤掉不可以见的图片
+    if (_WXJS(_img).css('display') == 'none' || _WXJS(_img).css('visibility') == 'hidden') {
+      // _log('ivisable image !! ' + _img.src);
+      continue;
     }
-    setTimeout(function() {
-        for (var j = 0; j < results.length; j++) {
-            var res = results[j];
-            if (!res.isLoaded) {
-                continue;
-            }
-            if (res.width > 290 && res.height > 290) {
-                callCB(res);
-                return;
-            }
+    if (_srcs[_img.src]) {
+      // added
+    } else {
+      _srcs[_img.src] = 1; // mark added
+      allImgs.push(_img);
+    }
+  };
+  var results = [];
+  var img;
+  for (var i = 0; i < allImgs.length && i < 100; i++) {
+    img = allImgs[i];
+    var newImg = new Image();
+    newImg.onload = function () {
+      this.isLoaded = true;
+      var loadedCount = 0;
+      for (var j = 0; j < results.length; j++) {
+        var res = results[j];
+        if (!res.isLoaded) {
+          break;
         }
+        loadedCount++;
+        if (res.width > 290 && res.height > 290) {
+          callCB(res);
+          break;
+        }
+      }
+      if (loadedCount == results.length) {
+        // 全部都已经加载完了，但还是没有找到。
         callCB();
-    }, 1000);
+      };
+    }
+    newImg.src = img.src;
+    results.push(newImg);
+  }
+  setTimeout(function () {
+    for (var j = 0; j < results.length; j++) {
+      var res = results[j];
+      if (!res.isLoaded) {
+        continue;
+      }
+      if (res.width > 290 && res.height > 290) {
+        callCB(res);
+        return;
+      }
+    }
+    callCB();
+  }, 1000);
 }
 ```
 
@@ -107,10 +107,10 @@ var getSharePreviewImage = function(cb) {
 当页面缓慢时，再用js代码去更改页面的title时，会发现已经无法修改了，用`setTimeout`延迟500ms去模拟这种情况时，会发现在pc浏览器和手机其他浏览器（非微信）测下，还是能修改title的。这时候就要用到一种hack技术了,亲测有效。
 ```javascript
 document.title = "前端小栈";
-var $iframe = $('<iframe src="/favicon.ico"></iframe>').on('load', function() { 
-    setTimeout(function() { 
-        $iframe.off('load').remove() 
-    }, 0) 
+var $iframe = $('<iframe src="/favicon.ico"></iframe>').on('load', function () {
+  setTimeout(function () {
+    $iframe.off('load').remove()
+  }, 0)
 }).appendTo($("body")); 
 ```
 

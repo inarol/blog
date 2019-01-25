@@ -15,24 +15,22 @@
 在旋转摄影机镜头时，画面直接被清空了，然后google了一下资料，发现这个扩展库只处理浏览器的环境，查看源码可以发现里面用了`element.clientWidth`，`element.clientWidth`，这些都是微信小游戏环境不支持的。
 
 ```js
-function handleTouchMoveRotate( event ) {
+function handleTouchMoveRotate(event) {
+  //console.log( 'handleTouchMoveRotate' );
+  rotateEnd.set(event.touches[0].pageX, event.touches[0].pageY);
+  rotateDelta.subVectors(rotateEnd, rotateStart);
 
-	//console.log( 'handleTouchMoveRotate' );
+  var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
 
-	rotateEnd.set( event.touches[ 0 ].pageX, event.touches[ 0 ].pageY );
-	rotateDelta.subVectors( rotateEnd, rotateStart );
+  // rotating across whole screen goes 360 degrees around
+  rotateLeft(2 * Math.PI * rotateDelta.x / element.clientWidth * scope.rotateSpeed);
 
-	var element = scope.domElement === document ? scope.domElement.body : scope.domElement;
+  // rotating up and down along whole screen attempts to go 360, but limited to 180
+  rotateUp(2 * Math.PI * rotateDelta.y / element.clientHeight * scope.rotateSpeed);
 
-	// rotating across whole screen goes 360 degrees around
-	rotateLeft( 2 * Math.PI * rotateDelta.x / element.clientWidth * scope.rotateSpeed );
+  rotateStart.copy(rotateEnd);
 
-	// rotating up and down along whole screen attempts to go 360, but limited to 180
-	rotateUp( 2 * Math.PI * rotateDelta.y / element.clientHeight * scope.rotateSpeed );
-
-	rotateStart.copy( rotateEnd );
-
-	scope.update();
+  scope.update();
 
 }
 ```
@@ -48,30 +46,29 @@ function handleTouchMoveRotate( event ) {
 import _window from './window';
 
 function inject() {
-    const { platform } = wx.getSystemInfoSync()
-    // 开发者工具无法重定义 window
-    if (typeof __devtoolssubcontext === 'undefined' && platform === 'devtools') {
-        for (const key in _window) {
-            const descriptor = Object.getOwnPropertyDescriptor(global, key)
+  const { platform } = wx.getSystemInfoSync()
+  // 开发者工具无法重定义 window
+  if (typeof __devtoolssubcontext === 'undefined' && platform === 'devtools') {
+    for (const key in _window) {
+      const descriptor = Object.getOwnPropertyDescriptor(global, key)
 
-            if (!descriptor || descriptor.configurable === true) {
-                Object.defineProperty(window, key, {
-                    value: _window[key]
-                })
-            }
-        }
-        window.parent = window
-    } else {
-        for (const key in _window) {
-            global[key] = _window[key]
-        }
-        global.window = global
-        global.top = global.parent = global
+      if (!descriptor || descriptor.configurable === true) {
+        Object.defineProperty(window, key, {
+          value: _window[key]
+        })
+      }
     }
+    window.parent = window
+  } else {
+    for (const key in _window) {
+      global[key] = _window[key]
+    }
+    global.window = global
+    global.top = global.parent = global
+  }
 }
 
 inject()
-
 ```
 
 ```js

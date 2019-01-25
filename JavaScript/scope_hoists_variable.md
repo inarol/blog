@@ -16,16 +16,16 @@
 
 ```javascript
 a();
-function a(){
-    console.log(1);
+function a() {
+  console.log(1);
 }
 a();
-function a(){
-    console.log(2);
+function a() {
+  console.log(2);
 }
 a();
-var a = function(){
-    console.log(3);
+var a = function () {
+  console.log(3);
 };
 a();
 ```
@@ -34,10 +34,10 @@ a();
 
 ```javascript
 var scope = "global";
-function f(){
-    console.log(scope);
-    var scope = "local";
-    console.log(scope);
+function f() {
+  console.log(scope);
+  var scope = "local";
+  console.log(scope);
 }
 ```
 
@@ -64,8 +64,8 @@ var a,b,c;
 javascript并没有类似C语言那样的块级作用域，因此，这也是常常给开发者带来的困惑，比如下面的例子:
 
 ```javascript
-for(var i = 0;i < 10;i++){
-    //dosometing(i)
+for (var i = 0; i < 10; i++) {
+  //dosometing(i)
 }
 console.log(i);//10
 ```
@@ -75,19 +75,19 @@ console.log(i);//10
 函数作用域是指在函数体内声明的所有变量都是始终可见的，而且有意思的是，甚至在变量声明之前就已经可以允许访问，这种特性被称作**声明提前(hoisting)**，函数声明提前的意思是，在函数体内所有的变量（不包括赋值操作），都会被提前到函数体的顶端。比如下面的例子：
 
 ```javascript
-function a(){
-    console.log(b);//undefined，但不会报错
-    var b = 1;
+function a() {
+  console.log(b);//undefined，但不会报错
+  var b = 1;
 }
 ```
 
 其实在javascript的预编译阶段里，会扫描整个a函数的代码，然后把变量b提前到函数的顶端，并赋值为`undefined`，所以上面的代码相当于: 
 
 ```javascript
-function a(){
-    var b;
-    console.log(b);
-    b = 1;
+function a() {
+  var b;
+  console.log(b);
+  b = 1;
 }
 ```
 
@@ -110,12 +110,12 @@ function a(){
 还有一种特殊情况，假设函数作用域内，变量名和函数名重复的情况下，到底那个优先呢，不妨验证下：
 
 ```javascript
-function a(){
-    console.log(b);//b函数的代码
-    function b(){
-    
-    }
-    var b = 1;
+function a() {
+  console.log(b);//b函数的代码
+  function b() {
+
+  }
+  var b = 1;
 }
 ```
 

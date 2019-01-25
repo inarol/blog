@@ -79,28 +79,28 @@ IE9、Opera、Firefox、Chrome和Safari都支持DOM事件流。
 ```javascript
 var $button = document.getElementById("button");
 var $div = document.getElementById("div");
-$div.addEventListener("click",function(event){
-    console.log("捕获阶段的div");
-},true);
-$button.addEventListener("click",function(event){
-	console.log("捕获阶段的button");
-},true);
-$button.addEventListener("click",function(event){
-	console.log("冒泡阶段的button");
-},false);
-$div.addEventListener("click",function(event){
-    console.log("冒泡阶段的div");
-},false);
+$div.addEventListener("click", function (event) {
+  console.log("捕获阶段的div");
+}, true);
+$button.addEventListener("click", function (event) {
+  console.log("捕获阶段的button");
+}, true);
+$button.addEventListener("click", function (event) {
+  console.log("冒泡阶段的button");
+}, false);
+$div.addEventListener("click", function (event) {
+  console.log("冒泡阶段的div");
+}, false);
 ```
 
 上面的例子，打印出来的是log顺序应该是：`捕获阶段的div` -> `捕获阶段的button` -> `冒泡阶段的button` -> `冒泡阶段的div`。   
 假设我只想让事件传播到捕获阶段的`捕获阶段的div`就停止了，这时候只要在事件处理程序里面加上`event.stopPropagation()`就ok了。
 
 ```javascript
-$div.addEventListener("click",function(event){
-	console.log("这是捕获阶段的div");
-	event.stopPropagation();
-},true);
+$div.addEventListener("click", function (event) {
+  console.log("这是捕获阶段的div");
+  event.stopPropagation();
+}, true);
 ```
 
 ### 事件处理程序
@@ -120,8 +120,8 @@ $div.addEventListener("click",function(event){
 <button onclick="hello()"></button>
 ```
 ```javascript
-function hello(){
-   console.log("hello world");
+function hello() {
+  console.log("hello world");
 }
 ```
 这种方式很明显的缺点是，用户如果在执行函数（`hello()`）没有加载完之前，就点击了按钮，页面就会抛出一个错误，当然这个可以通过try-catch来解决，另外，在《**javascript高级程序设计**》这本书中说到，这种方式会让HTML和javascript代码紧密耦合，维护性比较差，这个呢，我不敢苟同啊（毕竟angularJS 1.x都是这么做的，没感觉到难维护）。
@@ -136,8 +136,8 @@ function hello(){
 ```
 ```javascript
 var $btn = document.getElementById("button");
-$btn.onclick = function(){
-	console.log("hello world");
+$btn.onclick = function () {
+  console.log("hello world");
 };
 ```
 在使用DOM0级事件处理程序时，执行函数被认为是元素的方法。因此，这时候执行函数里的作用域就是当前元素了，这也是为什么`this`引用会指向元素而不是`window`的原因了。以这种方式添加的事件处理程序会在事件流的**冒泡阶段**被处理。   
@@ -153,25 +153,25 @@ $btn.onclick = null;
 
 ```javascript
 var $btn = document.getElementById("btn");
-btn.addEventListener("click",function(){
-	console.log(this);
-},false);
+btn.addEventListener("click", function () {
+  console.log(this);
+}, false);
 ```
 那么，为这个元素注销绑定的事件处理程序，应该是：
 ```javascript
 var $btn = document.getElementById("btn");
-btn.removeEventListener("click",function(){
-	console.log(this);
-},false);
+btn.removeEventListener("click", function () {
+  console.log(this);
+}, false);
 ```
 Sorry，这样是注销不了的。实际上，DOM2事件处理程序的规范要求，`addEventListener`和`removeEventListener`传入的事件处理程序函数必须相同，上面的例子是因为函数的引用地址不同。因此，我们可以这样处理：
 ```javascript
 var $btn = document.getElementById("btn");
-var handlder = function(){
-	console.log(this);
+var handlder = function () {
+  console.log(this);
 };
-btn.addEventListener("click",handlder,false);
-btn.removeEventListener("click",handlder,false);
+btn.addEventListener("click", handlder, false);
+btn.removeEventListener("click", handlder, false);
 ```
 
 另外，DOM2级事件处理程序，是允许一个元素同时注册同个类型的事件的，因此一个div绑定多个`click`，这种情况也是被允许的。我们知道`IE9+`,`FireFox`,`Safari`,`Chrome`,`Opera`都是兼容**DOM事件流**的，所以同样也兼容**DOM2级事件处理程序**。
@@ -183,11 +183,11 @@ btn.removeEventListener("click",handlder,false);
 
 ```javascript
 var $btn = document.getElementById("btn");
-var handlder = function(){
-	console.log(this);
+var handlder = function () {
+  console.log(this);
 };
-$btn.attachEvent("onclick",handlder);
-$btn.detachEvent("onclick",handlder);
+$btn.attachEvent("onclick", handlder);
+$btn.detachEvent("onclick", handlder);
 ```
 
 这里有几点要注意的：  
@@ -200,24 +200,24 @@ $btn.detachEvent("onclick",handlder);
 扯了这么多，不知道你看晕了没有。没关系，这里留一个经典的干货，**跨浏览器的事件处理程序**：
 ```javascript
 var EventUtil = {
-	addEvent:function(element,type,handler){
-		if(element.addEventListener){
-			element.addEventListener(type,handler,false);
-		}else if(element.attachEvent){
-			element.attachEvent("on"+type,handler);
-		}else{
-			element["on"+type] = handler;
-		}
-	},
-	removeEvent:function(element,type,handler){
-		if(element.removeEventListener){
-			element.removeEventListener(type,handler,false);
-		}else if(element.detachEvent){
-			element.detachEvent("on"+type,handler);
-		}else{
-			element["on"+type] = null;
-		}
-	}
+  addEvent: function (element, type, handler) {
+    if (element.addEventListener) {
+      element.addEventListener(type, handler, false);
+    } else if (element.attachEvent) {
+      element.attachEvent("on" + type, handler);
+    } else {
+      element["on" + type] = handler;
+    }
+  },
+  removeEvent: function (element, type, handler) {
+    if (element.removeEventListener) {
+      element.removeEventListener(type, handler, false);
+    } else if (element.detachEvent) {
+      element.detachEvent("on" + type, handler);
+    } else {
+      element["on" + type] = null;
+    }
+  }
 };
 ```
 

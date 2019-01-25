@@ -5,8 +5,7 @@
 ## JavaScript系列
 
 - [call与apply的区别](./JavaScript/call_apply.md)
-- [callee与caller的区别](./JavaScript/call_apply.md)
-- [浏览器的DOM事件](./JavaScript/dom_event.md)
+- [callee与caller用法和区别](./JavaScript/callee_caller.md)
 - [浏览器的DOM事件](./JavaScript/dom_event.md)
 - [JS广告投放组件踩坑记](./JavaScript/jsad.md)  
 - [Javascript Promise的使用总结](./JavaScript/promise.md)  
@@ -32,4 +31,4 @@
 
 ## 个人记录
 
-- [广州塔日转夜延时摄影](./Other/photo_canton_tower.md)
+- [广州塔日转夜延时摄影](./Photo/photo_canton_tower.md)

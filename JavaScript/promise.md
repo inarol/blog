@@ -20,24 +20,24 @@
 
 ```javascript
 $.ajax({
-    url: '/a',
-    success: function(data) {
-        if (data.code === 1) {
+  url: '/a',
+  success: function (data) {
+    if (data.code === 1) {
+      $.ajax({
+        url: '/b',
+        success: function (data) {
+          if (data.code === 1) {
             $.ajax({
-                url: '/b',
-                success: function(data) {
-                    if (data.code === 1) {
-                        $.ajax({
-                            url: '/c',
-                            success: function(data) {
-                                // ......
-                            }
-                        });
-                    }
-                }
+              url: '/c',
+              success: function (data) {
+                // ......
+              }
             });
+          }
         }
+      });
     }
+  }
 });
 ```
 
@@ -55,12 +55,12 @@ $.ajax({
 如果用回调的方式实现的话，大概是这样的：   
 
 ```javascript
-taskA(function() {
-    taskB(function() {
-        taskC(function() {
-            ...
-        });
+taskA(function () {
+  taskB(function () {
+    taskC(function () {
+      ...
     });
+  });
 });
 
 ```
@@ -73,17 +73,17 @@ taskA(function() {
 因此如果普罗米修斯会写代码的话，代码的实现大概是这样的:
 
 ```javascript
-var taskA = function() {};
-var taskB = function() {};
-var taskC = function() {};
+var taskA = function () { };
+var taskB = function () { };
+var taskC = function () { };
 var promise = Promise.resolve();
 promise
-    .then(taskA)
-    .then(taskB)
-    .then(taskC)
-    .catch(function() {
-        console.info("the End");
-    });
+  .then(taskA)
+  .then(taskB)
+  .then(taskC)
+  .catch(function () {
+    console.info("the End");
+  });
 ```
 
 先不说是否理解上面的代码，但是这种代码组织模式是不是更符合我们的直觉呢？其实这种模式就是所谓的 **Promise模式**，之所以称为模式，是因为它不是Javascript特有的东西，在各种语言平台都出现过:
@@ -134,10 +134,9 @@ Promise的状态转化只发生一次（从`pending`变成`resolve`或变成`rej
 
 类似Javascript的日期构造器 **Date** ,因此我们可以用构造函数 **Promise** 来创建一个promise对象，比如：  
 ```javascript
-var promise = new Promise(function(resolve, reject) {
-    //处理异步,结束后调用resolve或reject
+var promise = new Promise(function (resolve, reject) {
+  //处理异步,结束后调用resolve或reject
 });
-
 ```
 
 #### **实例方法**  
@@ -146,20 +145,19 @@ var promise = new Promise(function(resolve, reject) {
 
 ```javascript
 promise.then(function onResolve() {
-    //成功时调用
+  //成功时调用
 }, function onReject() {
-    //失败是调用
+  //失败是调用
 });
-
 ```
 
 `onResolve`和`onReject`两个都是可选的参数，异步操作成功时会调用`onResolve`，失败时则调用`onReject`，但是一般情况下，我们都建议使用`catch`进行错误的捕捉(下文做解释):
 
 ```javascript
 promise.then(function onResolve() {
-    //成功时调用
+  //成功时调用
 }).catch(function onReject(error) {
-    //失败是调用
+  //失败是调用
 });
 ```
 
@@ -177,9 +175,9 @@ promise.then(function onResolve() {
 从上文我们知道，**Promise** 是一个构造函数，因此我们可以使用 **new** 来实例化对象。
 
 ```javascript
-var promise = new Promise(function(resolve, reject) {
-    // 异步处理
-    // 处理结束后、调用resolve 或 reject
+var promise = new Promise(function (resolve, reject) {
+  // 异步处理
+  // 处理结束后、调用resolve 或 reject
 });
 ```
 
@@ -187,9 +185,9 @@ var promise = new Promise(function(resolve, reject) {
 
 ```javascript
 promise.then(function onResolve() {
-    //成功时调用
+  //成功时调用
 }, function onReject() {
-    //失败时调用
+  //失败时调用
 });
 ```
 
@@ -197,9 +195,9 @@ promise.then(function onResolve() {
 
 ```javascript
 promise.then(function onResolve() {
-    //成功时调用
+  //成功时调用
 }).catch(function onReject() {
-    //失败时调用
+  //失败时调用
 });
 ```
 
@@ -214,21 +212,21 @@ promise.then(function onResolve() {
 再玩这个游戏之前，先来学习一下Promise的**链式调用(Promise Chain)**吧。我们知道，“回调墙”从本质上来讲，任务是线性发生的，只不过`callback`的代码组织结构让人难以阅读和理解，人都习惯任务发生是一个线性结构。那么`Promise`的链式调用就是用来解决这个问题的。上文提到`promise`的实例方法`then`返回是一个新的promise对象，所以promise才得以链式调用。因此，`promise`的链式调用可以这样写：   
 
 ```javascript
-var promise = new Promise(function(resolve, reject) {
-    resolve();
+var promise = new Promise(function (resolve, reject) {
+  resolve();
 });
-var taskA = function() {
-    console.log("A done!");
+var taskA = function () {
+  console.log("A done!");
 };
-var taskB = function() {
-    console.log("B done!");
+var taskB = function () {
+  console.log("B done!");
 };
 promise
-    .then(taskA)
-    .then(taskB)
-    .catch(function(error) {
-        console.log(error);
-    });
+  .then(taskA)
+  .then(taskB)
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 可以你已经注意到，实例化promise的时候，我们是直接调用`resolve`的，其实这里我们还可以借助 **Promise** 的静态方法`Promise.resolve`来生成promise对（`Promise.reject`同理），因此下面的代码来实现：   
@@ -241,41 +239,41 @@ var promise = Promise.resolve();
 
 ```javascript
 var promise = Promise.resolve(1);
-var taskA = function(value) {
-    console.log(value); //1
-    return value + 1;
+var taskA = function (value) {
+  console.log(value); //1
+  return value + 1;
 };
-var taskB = function(value) {
-    console.log(value); //2
-    return value + 2;
+var taskB = function (value) {
+  console.log(value); //2
+  return value + 2;
 };
 promise
-    .then(taskA)
-    .then(taskB)
-    .catch(function(error) {
-        console.log(error);
-    });
+  .then(taskA)
+  .then(taskB)
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 值得注意的是，这里我们都是用`catch`来捕捉异常的。那到底用`.then`的第二个参数函数相比，跟使用`catch`又有什么区别呢？看下面的例子就明白了：
 
 ```javascript
 function throwError() {
-    throw new Error("错误");
+  throw new Error("错误");
 }
 
 function taskA(onReject) {
-    return Promise.resolve().then(throwError, onReject);
+  return Promise.resolve().then(throwError, onReject);
 }
 
 function taskB(onReject) {
-    return Promise.resolve().then(throwError).catch(onReject);
+  return Promise.resolve().then(throwError).catch(onReject);
 }
-taskA(function() {
-    console.log("taskA Error");
+taskA(function () {
+  console.log("taskA Error");
 });
-taskB(function() {
-    console.log("taskB Error");
+taskB(function () {
+  console.log("taskB Error");
 });
 ```
 
@@ -294,35 +292,35 @@ taskB(function() {
 老规矩，在玩游戏之前，我们先来学习理论知识。 **Promise.all** 是Promise提供的一个静态方法，用于将多个Promise实例，包装成一个新的Promise实例。例如：   
 
 ```javascript  
-var p1 = new Promise(function(resolve, reject) {
-    var value = Math.random();
-    if (value > 0.5) {
-        resolve(value);
-    } else {
-        reject("p1:" + value);
-    }
+var p1 = new Promise(function (resolve, reject) {
+  var value = Math.random();
+  if (value > 0.5) {
+    resolve(value);
+  } else {
+    reject("p1:" + value);
+  }
 });
-var p2 = new Promise(function(resolve, reject) {
-    var value = Math.random();
-    if (value > 0.5) {
-        resolve(value);
-    } else {
-        reject("p2:" + value);
-    }
+var p2 = new Promise(function (resolve, reject) {
+  var value = Math.random();
+  if (value > 0.5) {
+    resolve(value);
+  } else {
+    reject("p2:" + value);
+  }
 });
-var p3 = new Promise(function(resolve, reject) {
-    var value = Math.random();
-    if (value > 0.5) {
-        resolve(value);
-    } else {
-        reject("p3:" + value);
-    }
+var p3 = new Promise(function (resolve, reject) {
+  var value = Math.random();
+  if (value > 0.5) {
+    resolve(value);
+  } else {
+    reject("p3:" + value);
+  }
 });
 var promise = Promise.all([p1, p2, p3]);
 promise.then(function onResolved(value) {
-    console.info(value); //[0.5985190889530145, 0.6911524297857181, 0.8921527493860548]
+  console.info(value); //[0.5985190889530145, 0.6911524297857181, 0.8921527493860548]
 }).catch(function onRejected(error) {
-    console.info(error); //p3:0.46978503261829485
+  console.info(error); //p3:0.46978503261829485
 });
 ```
 
@@ -341,35 +339,35 @@ promise的状态由`p1、p2、p3`决定，分成两种情况：
   
 **Promise.race**也是Promise提供的静态方法，同样是将多个Promise实例，包装成一个新的Promise实例。例如：  
 ```javascript  
-var p1 = new Promise(function(resolve, reject) {
-    var value = Math.random();
-    if (value > 0.5) {
-        resolve("p1成功");
-    } else {
-        reject("p1失败");
-    }
+var p1 = new Promise(function (resolve, reject) {
+  var value = Math.random();
+  if (value > 0.5) {
+    resolve("p1成功");
+  } else {
+    reject("p1失败");
+  }
 });
-var p2 = new Promise(function(resolve, reject) {
-    var value = Math.random();
-    if (value > 0.5) {
-        resolve("p2成功");
-    } else {
-        reject("p2失败");
-    }
+var p2 = new Promise(function (resolve, reject) {
+  var value = Math.random();
+  if (value > 0.5) {
+    resolve("p2成功");
+  } else {
+    reject("p2失败");
+  }
 });
-var p3 = new Promise(function(resolve, reject) {
-    var value = Math.random();
-    if (value > 0.5) {
-        resolve("p3成功");
-    } else {
-        reject("p3失败");
-    }
+var p3 = new Promise(function (resolve, reject) {
+  var value = Math.random();
+  if (value > 0.5) {
+    resolve("p3成功");
+  } else {
+    reject("p3失败");
+  }
 });
 var promise = Promise.race([p1, p2, p3]);
 promise.then(function onResolved(value) {
-    console.info(value); //p1成功
+  console.info(value); //p1成功
 }).catch(function onRejected(error) {
-    console.info(error); //p1失败
+  console.info(error); //p1失败
 });
 ```
 

@@ -16,11 +16,11 @@
 
 ```html
 <script type="text/javascript">
-var ad_config = {
-	width:300,
-	height:280,
-	adCode:"acbd"
-};
+  var ad_config = {
+    width: 300,
+    height: 280,
+    adCode: "acbd"
+  };
 </script>
 <script type="text/javascript" src="//xxx.com/ad.js"></script>
 ```
@@ -54,18 +54,18 @@ $("#textarea").val("<script><"+"/script>");//而需要把script标签拆开
 ```js
 var clickJsLinkTime;
 if (isIE) {
-   Util.onEvent(document, 'mouseup', function(event) {
-      var target = event.target || event.srcElement;
-      if (target.nodeType === 1 && /^ajavascript:/i.test(target.tagName + target.href)) {
-         clickJsLinkTime = new Date();
-      }
-   });
+  Util.onEvent(document, 'mouseup', function (event) {
+    var target = event.target || event.srcElement;
+    if (target.nodeType === 1 && /^ajavascript:/i.test(target.tagName + target.href)) {
+      clickJsLinkTime = new Date();
+    }
+  });
 }
-Util.onEvent(window, "beforeunload", function(){
-   //由a标签点击触发的beforeunload
-   if (isIE && (new Date() - clickJsLinkTime < 50)) {
-      return;
-   }
+Util.onEvent(window, "beforeunload", function () {
+  //由a标签点击触发的beforeunload
+  if (isIE && (new Date() - clickJsLinkTime < 50)) {
+    return;
+  }
 });
 ```
 

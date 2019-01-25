@@ -28,15 +28,15 @@
 
 ```javascript
 var food = "fish";
-var Tom = {food:"beef"};
-var eatFood = function(friend1,friend2){
-	console.log('我跟'+friend1+"和"+friend2+"一起去吃"+this.food);
+var Tom = { food: "beef" };
+var eatFood = function (friend1, friend2) {
+  console.log('我跟' + friend1 + "和" + friend2 + "一起去吃" + this.food);
 };
 /*我跟Karry和Mage一起去吃fish*/
-eatFood("Karry","Mage"); 
+eatFood("Karry", "Mage");
 /*我跟Monter和Father一起去吃beef*/
-eatFood.call(Tom,"Monter","Father"); 
-eatFood.apply(Tom,["Monter","Father"]);
+eatFood.call(Tom, "Monter", "Father");
+eatFood.apply(Tom, ["Monter", "Father"]);
 ```
 
 eatFood是一个函数对象，`call`和`apply`是函数对象的一个内置的方法。在非严格模式下，直接调用eatFood()的时候，函数里的this是指向window的，所以打印出来的`food`是 `fish` ；而通过`call`或`apply`调用，此时eatFood的this指针已经被Tom代替了，所以，因此打印出来的是`beef`。  
@@ -49,14 +49,14 @@ eatFood是一个函数对象，`call`和`apply`是函数对象的一个内置的
 举个栗子，在实现javascript的对象继承的时候，除了使用原型链的方式外，我们还可以使用是用`call`和`apply`来实现javascript的对象继承（构造函数实现继承）。
 
 ```javascript
-function Animal(name){
-	this.name = name;
-	this.sayName = function(){
-	   console.log(this.name);
-	}
+function Animal(name) {
+  this.name = name;
+  this.sayName = function () {
+    console.log(this.name);
+  }
 }
-function Cat(name){
-	Animal.call(this,name);/*或Animal.apply(this,[name])*/
+function Cat(name) {
+  Animal.call(this, name);/*或Animal.apply(this,[name])*/
 }
 var cat = new Cat("maomao");
 cat.sayName();

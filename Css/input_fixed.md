@@ -17,127 +17,127 @@
 
 ```html
 <body>
-    <header></header>
-    <div class="main">
-        <div class="container">
-            我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br> 我是内容，我是内容！
-            <br>
-        </div>
+  <header></header>
+  <div class="main">
+    <div class="container">
+      我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br> 我是内容，我是内容！
+      <br>
     </div>
-    <footer>
-        <input type="text" placeholder="来，输入手机号吧" />
-        <button class="submit">确定</button>
-    </footer>
+  </div>
+  <footer>
+    <input type="text" placeholder="来，输入手机号吧" />
+    <button class="submit">确定</button>
+  </footer>
 </body>
 ```
 
 ```css
 body {
-    margin: 0;
-    padding: 0px;
+  margin: 0;
+  padding: 0px;
 }
 
 header {
-    position: fixed;
-    height: 30px;
-    line-height: 30px;
-    width: 100%;
-    top: 0px;
-    background: #ccc;
+  position: fixed;
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+  top: 0px;
+  background: #ccc;
 }
 
 .main {
-    position: absolute;
-    top: 30px;
-    width: 100%;
-    bottom: 40px;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+  position: absolute;
+  top: 30px;
+  width: 100%;
+  bottom: 40px;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
 .mian .container {
-    height: 1200px;
-    width: 100%;
-    background: #fff;
+  height: 1200px;
+  width: 100%;
+  background: #fff;
 }
 
 footer {
-    position: fixed;
-    height: 40px;
-    line-height: 40px;
-    width: 100%;
-    bottom: 0px;
-    background: #ccc;
+  position: fixed;
+  height: 40px;
+  line-height: 40px;
+  width: 100%;
+  bottom: 0px;
+  background: #ccc;
 }
 
 footer input,
 footer button {
-    font-size: 18px;
+  font-size: 18px;
 }
  
 ```

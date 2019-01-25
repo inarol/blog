@@ -58,11 +58,8 @@ Retina屏幕带给了在用户视觉体验上的极大优化，但同时也给�
 **srcset**是img标签的一个属性，该属性可以设置不同DPR下加载不同的图片源，包含两个值，由逗号分隔开的列表，比如下面的例子：
 
 ```html
-<img 
-    src="src/1x.jpg"  
-    srcset="src/2x.jpg 2x, src/3x.jpg 3x" 
-    alt="" 
-/> 
+<img src="src/1x.jpg" srcset="src/2x.jpg 2x, src/3x.jpg 3x" alt="" />
+
 ```
 上面代码表示，在屏幕的dpr为2的情况下，会选择加载2x.png，在dpr为3的时候，会选择加载3x.png，假设屏幕dpr都不是列举得值时或浏览器不支持srcset属性时，会默认选择加载1x.png，这似乎可以解决不同屏幕密度下加载不同的图片。然而安卓阵营的设备DPR根本没有规范，如果要适配这些设备的话，需要写更多的设置。
 
@@ -76,14 +73,14 @@ Retina屏幕带给了在用户视觉体验上的极大优化，但同时也给�
 
 ```html
 <img 
-    srcset="
-        src/200px.jpg 200w,  
-        src/600px.jpg 600w,
-        src/800px.jpg 800w" 
-    sizes="
-        (max-width:200px) 200px,
-        (max-width:600px) 600px,
-        (max-width:800px) 60vw"
+  srcset="
+    src/200px.jpg 200w,  
+    src/600px.jpg 600w,
+    src/800px.jpg 800w" 
+  sizes="
+    (max-width:200px) 200px,
+    (max-width:600px) 600px,
+    (max-width:800px) 60vw"
 />
 ```
 上面的例子表示，在dpr=1时，浏览器的viewport小于200px时，浏览器会智能选择200px；假设浏览器的viewport为800时，使图片的宽度为viewport的60%，即`480px`，那么浏览器会智能选择`600px.jpg`这张图片。
@@ -104,11 +101,12 @@ Retina屏幕带给了在用户视觉体验上的极大优化，但同时也给�
 .1px {
   border-bottom: 1px solid #000;
 }
+
 @media (-webkit-min-device-pixel-ratio: 2) {
-    .1px{
-        border-bottom: 0.5px solid #000;
-    }
-} 
+  .1px {
+    border-bottom: 0.5px solid #000;
+  }
+}
 ```
 如果你的web应用只想兼容IOS8+的话，这个方案算是比较简单优雅的，dpr为3的设备渲染出来的效果差异也基本可以忽略。flexible-2.0的版本是通过js检测是否支持0.5px像素单位，如果不支持则用1px，详情查看[flexible](https://github.com/amfe/lib-flexible/blob/2.0/index.js#L32-L43)。
 
@@ -122,10 +120,10 @@ Retina屏幕带给了在用户视觉体验上的极大优化，但同时也给�
 
 ```css
 .border-top {
-    /* 解决pc下chrome，border-image失效的问题 */
-    border: 1px solid transparent; 
-    border-width: 1px 0 0 0;
-    border-image: url(../img/border-image.png) 0 0 2 0 stretch;
+  /* 解决pc下chrome，border-image失效的问题 */
+  border: 1px solid transparent;
+  border-width: 1px 0 0 0;
+  border-image: url(../img/border-image.png) 0 0 2 0 stretch;
 }
 ```
 
@@ -143,7 +141,7 @@ viewport是屏幕显示的区域，我们可以通过initial-scale实现屏幕�
 
 ```css
 .border {
-    border: 1px solid #000;
+  border: 1px solid #000;
 }
 ```
 目前手淘和饿了么、美团，均使用了这种方案，当然，这种方案也有致命的缺点：由于flexible.js未对Android的dpr进行适配，故不兼容Android设备。
@@ -154,38 +152,40 @@ viewport是屏幕显示的区域，我们可以通过initial-scale实现屏幕�
 
 ```css
 .border-bottom {
-    position:relative;
+  position: relative;
 }
+
 .border-bottom:after {
-    content: '';
-    position: absolute;
-    left:0;
-    bottom:0;
-    width: 100%;
-    border-bottom: 1px solid #000;
-    transform: scaleY(0.5);
-    transform-origin: 0 0;
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border-bottom: 1px solid #000;
+  transform: scaleY(0.5);
+  transform-origin: 0 0;
 }
 ```
 四条边的实现：
 
 ```css
-.border{
-    position: relative;
-    margin-bottom: 20px;
-    border:none;
+.border {
+  position: relative;
+  margin-bottom: 20px;
+  border: none;
 }
-.border:after{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 200%;
-    border: 1px solid #000;
-    box-sizing: border-box;
-    transform: scale(0.5);
-    transform-origin: 0 0;
+
+.border:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 200%;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  transform: scale(0.5);
+  transform-origin: 0 0;
 }
 ```
 需要对dpr为1的进行兼容，可利用css的`media queries`重置dpr=1的设备样式，也可用js读取`devicePixelRatio`进行适配。
@@ -209,23 +209,23 @@ flexible的web移动端适配解决方案是手淘研究出来的，于2014年�
 
 ```javascript
 if (!dpr && !scale) {
-    var isAndroid = win.navigator.appVersion.match(/android/gi);
-    var isIPhone = win.navigator.appVersion.match(/iphone/gi);
-    var devicePixelRatio = win.devicePixelRatio;
-    if (isIPhone) {
-        // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
-        if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
-            dpr = 3;
-        } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
-            dpr = 2;
-        } else {
-            dpr = 1;
-        }
+  var isAndroid = win.navigator.appVersion.match(/android/gi);
+  var isIPhone = win.navigator.appVersion.match(/iphone/gi);
+  var devicePixelRatio = win.devicePixelRatio;
+  if (isIPhone) {
+    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
+    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
+      dpr = 3;
+    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
+      dpr = 2;
     } else {
-        // 其他设备下，仍旧使用1倍的方案
-        dpr = 1;
+      dpr = 1;
     }
-    scale = 1 / dpr;
+  } else {
+    // 其他设备下，仍旧使用1倍的方案
+    dpr = 1;
+  }
+  scale = 1 / dpr;
 }
 ```
 手淘给出的回复是，国内还有很多设备对viewport的支持不是很好，在部分设备上，initial-scale的设置会无效，部分webview的屏幕宽度与设备宽度不一致。
@@ -234,15 +234,17 @@ if (!dpr && !scale) {
 
 ```css
 div {
-    width: 1rem; 
-    height: 0.4rem;
-    font-size: 12px; // 默认写上dpr为1的fontSize
+  width: 1rem;
+  height: 0.4rem;
+  font-size: 12px; // 默认写上dpr为1的fontSize
 }
+
 [data-dpr="2"] div {
-    font-size: 24px;
+  font-size: 24px;
 }
+
 [data-dpr="3"] div {
-    font-size: 36px;
+  font-size: 36px;
 }
 ```
 但是在一些slogan的字体上，估计还得使用rem单位，因此这个权衡还得看实际的场景。

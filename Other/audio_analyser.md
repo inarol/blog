@@ -100,9 +100,9 @@ bufferSource.start();
 
 ```js
 const offlineContext = new OfflineAudioContext(
-    audioBuffer.numberOfChannels, // 声道数
-    audioBuffer.length, // buffer大小
-    audioBuffer.sampleRate, // 采样率
+  audioBuffer.numberOfChannels, // 声道数
+  audioBuffer.length, // buffer大小
+  audioBuffer.sampleRate, // 采样率
 );
 ```
 
@@ -118,7 +118,7 @@ const scriptProcessorNode = offlineContext.createScriptProcessor();
 
 也就是analyserNode与输出音频直接新增了一个`scriptProcessorNode`模块，同时该模块注册一个回调方法去采集过程中的音频数据：
 
-```
+```js
 const analyseData = {};
 scriptProcessorNode.onaudioprocess = () => {
   const currentTime = Math.floor(offlineContext.currentTime * 100);
