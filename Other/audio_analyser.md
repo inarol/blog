@@ -12,7 +12,7 @@
 
 最近在做微信小游戏时，需要实现一个讲音乐图形化的需求，网上很多用`Web Audio API`就可以轻松实现把音频转换为图形的例子，比如[Web Audio API绘制可视化音乐](https://www.chunqiuyiyu.com/2017/04/draw-visual-music-with-web-audio-api.html)这个，但微信小游戏环境目前还不支持`Web Audio API`，所以想到了办法只能是做离线分析音频的频率了。  
 
-关离线要怎么做？找个真实的浏览器环境再写段JavasSript脚本去采集？不不不，感觉实现起来就很麻烦，但思路基本是正确的，只是我们不需要用真实的浏览器去解析，大google开源了一个`headless Chrome`的工具[Puppeteer](https://github.com/GoogleChrome/puppeteer)，这样我们就可以集成到nodejs中，写出基于 `Nodejs + Puppeteer`的离线解析音频频率的工具。
+关离线要怎么做？找个真实的浏览器环境再写段JavasScript脚本去采集？不不不，感觉实现起来就很麻烦，但思路基本是正确的，只是我们不需要用真实的浏览器去解析，大google开源了一个`headless Chrome`的工具[Puppeteer](https://github.com/GoogleChrome/puppeteer)，这样我们就可以集成到nodejs中，写出基于 `Nodejs + Puppeteer`的离线解析音频频率的工具。
 
 ## Puppeteer
 

@@ -6,7 +6,7 @@
 * [兼容微信小游戏环境](#兼容微信小游戏环境)
 * [关于MouseEvent和WheelEvent](#关于mouseevent和wheelevent)
 
-[three-orbit-controls](https://github.com/mattdesl/three-orbit-controls) 这个是 [Threejs](https://github.com/mrdoob/three.js/) 的扩展库，由于控制摄影机轨道，类似现实中摄影师坐在轨道车那样，可以自由控制摄影的朝向。想看效果直接观看Threejs的官方例子：[https://threejs.org/examples/misc_controls_orbit.html](https://threejs.org/examples/misc_controls_orbit.html)
+[three-orbit-controls](https://github.com/mattdesl/three-orbit-controls) 这个是 [Threejs](https://github.com/mrdoob/three.js/) 的扩展库，用于控制摄影机轨道，类似现实中摄影师坐在轨道车那样，可以自由控制摄影的朝向。想看效果直接观看Threejs的官方例子：[https://threejs.org/examples/misc_controls_orbit.html](https://threejs.org/examples/misc_controls_orbit.html)
 
 ## 兼容微信小游戏环境
 
