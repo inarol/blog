@@ -16,6 +16,7 @@
 - [函数作用域和变量声明提升](./JavaScript/scope_hoists_variable.md)  
 - [three-orbit-controls在微信小游戏环境的问题](./JavaScript/three_orbit_controls.md)  
 - [Javascript的类型转换](./JavaScript/types.md)  
+- [Object.create](./JavaScript/object_create.md)  
 
 ## CSS系列
 
