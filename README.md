@@ -2,6 +2,10 @@
 
 持续更新中...
 
+## 基础知识
+
+- [正则表达式总结](./Basis/regular.md)
+
 ## 小游戏系列
 
 - [用Threejs写的微信小游戏详解系列文章](https://github.com/inarol/rungame-blog)
@@ -16,7 +20,8 @@
 - [函数作用域和变量声明提升](./JavaScript/scope_hoists_variable.md)  
 - [three-orbit-controls在微信小游戏环境的问题](./JavaScript/three_orbit_controls.md)  
 - [Javascript的类型转换](./JavaScript/types.md)  
-- [Object.create](./JavaScript/object_create.md)  
+- [Object.create的介绍](./JavaScript/object_create.md)  
+- [Javascript继承的多种方式](./JavaScript/extend.md)  
 
 ## CSS系列
 
