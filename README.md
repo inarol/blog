@@ -4,7 +4,7 @@
 
 ## 基础知识
 
-- [正则表达式总结](./Basis/regular.md)
+- [正则表达式总结](./Basic/regular_expression.md)
 
 ## 小游戏系列
 
