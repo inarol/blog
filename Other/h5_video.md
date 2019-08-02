@@ -151,3 +151,4 @@ if (promise !== undefined) {
 
 - ios端的QQ浏览器（最新版9.6.1）对内联播放支持有问题，video还是处于顶层。
 - 各大浏览器对内联播放的支持程度不一样，建议根据产品的运行环境比例，再单独做HACK。
+- 对视频进行解码（配合webassembly）后，再用canvas做渲染，解决恶心浏览器视频管制的终极方案，比如https://github.com/qiaozi-tech/WXInlinePlayer，但性能有待商榷。
