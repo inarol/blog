@@ -1,8 +1,8 @@
-## H5页面视频播放
+# H5页面视频播放
 
-### 自动播放
+## 自动播放
 
-#### 微信
+### 微信
 
 - video元素设置`autoplay`
 - 引入微信JSSDK的脚本：http://res.wx.qq.com/open/js/jweixin-1.4.0.js
@@ -18,7 +18,7 @@ document.addEventListener('WeixinJSBridgeReady', () => {
 </script>
 ```
 
-#### QQ
+### QQ
 
 - 设置`autoplay`
 
@@ -26,7 +26,7 @@ document.addEventListener('WeixinJSBridgeReady', () => {
 <video src="foo.mp4" autoplay />
 ```
 
-#### QQ浏览器
+### QQ浏览器
 
 ios：
 
@@ -37,7 +37,7 @@ Android
 
 - 设置`autoplay`
 
-#### Safari
+### Safari
 
 ios 9 之前（包含ios9），播放策略就比较简单：
 
@@ -61,7 +61,7 @@ ios 10+：
 
 - https://webkit.org/blog/6784/new-video-policies-for-ios/
 
-#### Chrome
+### Chrome
 
 Chrome浏览器（PC）播放策略，符合以下情况允许自动播放：
 
@@ -133,11 +133,11 @@ if (promise !== undefined) {
 
 - https://developers.google.com/web/updates/2017/09/autoplay-policy-changes
 
-#### 其他浏览器
+### 其他浏览器
 
 安卓设备的浏览器比较杂乱，对自动播放的限制策略不尽相同，研究起来需要花费大量的时间。总结，无论是否支持自动播放，我们都需要处理视频播放异常的情况。
 
-### 内联播放
+## 内联播放
 
 在早期的浏览器，video播放器是在页面顶层的，无法视频上面添加设计元素。现在，各大移动端浏览器逐渐支持了内联播放：
 
