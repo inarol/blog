@@ -32,6 +32,7 @@
 
 ## 其他系列
 
+- [H5页面视频播放](./Other/h5_video.md)
 - [基于puppeteer离线解析音频频率信息](./Other/audio_analyser.md)
 - [tree-shaking处理副作用代码](./Other/tree_shaking_side_effect.md)
 - [微信前端开发知识库](./Other/wx_summary.md)
