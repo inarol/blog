@@ -1,0 +1,3 @@
+# localStorage的浏览器层实现
+
+我们知道localStorage是基于origin去存储数据的，在chrome中，不同的

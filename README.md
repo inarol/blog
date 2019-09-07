@@ -40,9 +40,13 @@
 - [Windows下搭建Ionic开发环境](./Other/ionic.md)
 - [分享一些实用的sublime插件](./Other/sublime.md)
 
+## 编译原理
+
+- [Babel内部原理系列-AST的构建过程](./Compiler/babel-ast.md)
+
 ## Webkit内部实现
 
-* locastorage的实现（TODO...）
+* localstorage的实现（TODO...）
 
 ## 个人记录
 
