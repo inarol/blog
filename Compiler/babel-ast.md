@@ -221,16 +221,16 @@ add(1, 2);
 
 有了Token之后，就可以进入语法分析阶段了，如果语法分析过程中遇到问题，就会抛出那个我们很熟悉的错误，比如输入`var =`，我们知道变量声明后面必须跟变量名，而`=`明显是不合法的：
 
-<p style="color: red;">
+```
 Uncaught SyntaxError: Unexpected token ;
-<p>
+```
 
 而在`babel-parser`中，语法分析的入口函数是`parseBlockOrModuleBlockBody`，语法解析会经过以下步骤：
 
 
 - **块级解析**：从函数命名可以知道这是用于解析块级或模块的，那么如何划分各个块级呢。对于文件而言，边界标识是`eof`（end of file），而普通块级的边界则是`}`，解析到这两个Token时，`eat`就会跳出循环停止解析，在遇到这两个标识前，`babe-parser`根据各个表达式进入`parseStatement()`阶段。
-- **parseStatement解析：**在源码开始解析时，默认调用了一次`nextToken()`生成了关键字，然后根据关键字去处理各种`parser***Statement`的情况，举个例子，函数声明：`var a = 1;`，`var`是变量声明的关键字，因此会进入`parseVarStatement()`解析。
-- **parseVarStatement解析：**调用`next()`生成下一个token，并进入`parseVar`解析，首先会先检查标识符（Identifier）是否合法，不合法则抛出异常，如果标识符之后跟着`=`，则进行赋值操作`parseMaybeAssign()`，再以`VariableDeclaration`的类型，调用`finishNode()`闭合Token。
+- **parseStatement解析**：在源码开始解析时，默认调用了一次`nextToken()`生成了关键字，然后根据关键字去处理各种`parser***Statement`的情况，举个例子，函数声明：`var a = 1;`，`var`是变量声明的关键字，因此会进入`parseVarStatement()`解析。
+- **parseVarStatement解析**：调用`next()`生成下一个token，并进入`parseVar`解析，首先会先检查标识符（Identifier）是否合法，不合法则抛出异常，如果标识符之后跟着`=`，则进行赋值操作`parseMaybeAssign()`，再以`VariableDeclaration`的类型，调用`finishNode()`闭合Token。
 
 以下是在分析源码时画了一个草图：
 
